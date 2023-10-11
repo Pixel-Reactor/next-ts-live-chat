@@ -57,8 +57,8 @@ export default function Home() {
   }, [channel, socket]);
 
   const HandleMessage =(message:any) => {
-    console.log(channelSel.id,message.channel,)
-    if (message.channel === channelSel.id) {
+    console.log(channel.id,message.channel)
+    if (message.channel === channel.id) {
       setMessages((oldOne: any) => [...oldOne, message]);
     }
   }
