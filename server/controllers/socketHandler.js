@@ -15,7 +15,7 @@ export const SocketHandler = async () => {
     console.log("started")
     io.on("connection", (socket) => {
       console.log("a user connected")
-
+        
       socket.on("id", async (id) => {
        
 
@@ -41,6 +41,7 @@ export const SocketHandler = async () => {
 
 
       socket.on("sendmessage", async (message) => {
+        console.log(message)
         const userInfo = await socketUser(message.from);
         const messageId = uuidv4();
         const save = await connection.query(`INSERT INTO messages(id,sender,recipient,text) VALUES(?,?,?,?);`, [messageId, userInfo.id, message.channel.id, message.message.text])
@@ -48,10 +49,7 @@ export const SocketHandler = async () => {
         if (save[0].affectedRows > 0) {
           const date = new Date();
 
-       
-          socket.broadcast.emit("newmessage", { sender: userInfo, text: message.message.text, date: date, id: messageId, channel: message.channel.id })
-       
-        
+          socket.broadcast.emit("newmessage", { sender: userInfo, text: message.message.text, date: date, id: messageId, channel: message.channel.id })        
       
         } else {
           io.emit("newmessage", { sender: userInfo, text: " An error occurred retrieving this message ", date: date })

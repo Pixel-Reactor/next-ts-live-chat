@@ -24,29 +24,32 @@ interface MessageCardProps {
       const now :Date= new Date()
       const date:Date = new Date(message.date);
       const Diff:number = date.getTime() - now.getTime();
-      const daysDiff: number =(Math.round(Diff / (1000 * 60 * 60 * 24)))* -1;
+      const daysDiff: number =(Math.round(Diff / (1000 * 60 * 60 * 24))) * -1;
+      const hour = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
+      const minutes = date.getMinutes() < 10 ? '0'+date.getMinutes() : date.getMinutes();
+
       if(daysDiff < 1){
-        return <span>today</span>
+        return <span>today {hour}:{minutes}</span>
       }else if(daysDiff === 1){
-        return <span>yesterday</span>
+        return <span>yesterday {hour}:{minutes}</span>
       }
-      return <span className='text-zinc-300'>{daysDiff} {daysDiff > 1? 'days' : 'day'} ago</span>
+      return <span className='text-zinc-300'>{daysDiff} {daysDiff > 1? 'days' : 'day'} ago {hour}:{minutes}</span>
     }
 
     return (
       <div className='max-w-lg  h-full flex text-md  rounded-lg'>
         <div className='flex  w-full items-center h-full  '>
-        <div> 
+        <div className=''> 
         <img src={message.sender.avatar} 
-        className='w-8 h-8 min-w-[2rem]  object-cover rounded-md' alt="sender" />
+        className='w-10 h-10 min-w-[2.5rem]  object-cover rounded-md' alt="sender" />
         </div>
-        <div className='ml-6 flex flex-col'>
+        <div className='ml-6 flex flex-col p-1'>
           <div className='flex gap-2'>
              <p className='text-zinc-400 '>{message.sender.username}</p> 
              <p className='text-xs flex items-center'>{PrintDate()}</p> 
              </div>
            
-            <p className='text-zinc-200 font-normal'>{message.text}</p>
+            <p className='text-zinc-100/90 font-normal'>{message.text}</p>
             </div>
         </div>
       

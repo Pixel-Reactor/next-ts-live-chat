@@ -12,12 +12,12 @@ export default function SideBar({}) {
   const [allchannels, setAllchannels] = useState();
 
   useEffect(() => {
-    if (socket) {
+    if(socket) {
       socket.on("allchannels", (channelslist: any) => {
         setAllchannels(channelslist.list);
       });
     }
-  }, [socket]);
+  },[socket]);
   useEffect(() => {
     if(channelIn){
        console.log("channel in from sidebar", channelIn.id);
@@ -32,6 +32,7 @@ export default function SideBar({}) {
           {" "}
           {allchannels?.map((item: any) => (
             <p
+              key={item.id}
               onClick={() => setChannelIn(item)}
               className={`w-full ${
                 channelIn?.id === item.id ? "bg-zinc-300/20" : "" ?? ""

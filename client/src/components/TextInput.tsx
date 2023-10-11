@@ -7,7 +7,7 @@ import { BsFillSendFill, BsEmojiLaughingFill } from "react-icons/bs";
 
 
 const TextInput = ({emojionprop,channelsel}:any) => {
-    const { signedUser ,socket,channel} = useMyContext();
+    const { signedUser ,socket,channelIn} = useMyContext();
     const [emojion, setemojion] = useState(false);
 
     const [message, setmessage] = useState<message>(
@@ -19,10 +19,11 @@ const TextInput = ({emojionprop,channelsel}:any) => {
       };
       const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        
-        socket.emit("sendmessage", { from: signedUser.id, message: message,channel:channelsel });
+        if(signedUser){ 
+        socket.emit("sendmessage", { from: signedUser.id, message: message,channel:channelIn });
        
-        setmessage({  text: "" });
+        setmessage({  text: "" });}
+       
       };
      useEffect(() => {
      setemojion(emojionprop)
@@ -30,7 +31,7 @@ const TextInput = ({emojionprop,channelsel}:any) => {
      
       
   return (
-    <div className="h-16 px-3 text-white mb-1">
+    <div className="h-16 px-3  text-white mb-1">
     <form
       onChange={(e) => e.preventDefault()}
       onSubmit={handleSubmit}
