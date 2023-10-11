@@ -20,8 +20,7 @@ export const SocketHandler = async () => {
        
 
         socket.userId = id; 
-        console.log('id set')
-        socket.join('default')
+       
         const userInfo = await socketUser(id.id);
         const channelinfo = await GetChannelInfo(id.channel)
 
@@ -41,16 +40,6 @@ export const SocketHandler = async () => {
       });
 
 
-
-      socket.on("changechannel", (newchannel) => {
-
-        socket.leaveAll();
-        socket.join(newchannel);
-        console.log(`Usuario ${socket.userId} cambió a la sala ${newchannel}`);
-
-
-      });
-
       socket.on("sendmessage", async (message) => {
         const userInfo = await socketUser(message.from);
         const messageId = uuidv4();
@@ -59,26 +48,20 @@ export const SocketHandler = async () => {
         if (save[0].affectedRows > 0) {
           const date = new Date();
 
-          // Asegúrate de emitir el mensaje a la nueva sala después de cambiar de sala
-          io.to(message.channel.id).emit("newmessage", { sender: userInfo, text: message.message.text, date: date, id: messageId, channel: message.channel.id })
-          console.log("Emitted new message to room:", message.channel.id);
-          console.log(socket.rooms[0])
-          //  console.log(send)
-          const socketsEnSala1 = io.sockets.adapter.rooms
-          console.log("IDs de sockets en sala1:", socketsEnSala1);
-          // console.log("mi id", socket.id)
+       
+          socket.broadcast.emit("newmessage", { sender: userInfo, text: message.message.text, date: date, id: messageId, channel: message.channel.id })
+       
+        
+      
         } else {
           io.emit("newmessage", { sender: userInfo, text: " An error occurred retrieving this message ", date: date })
         }
       });
 
-
-
-
       socket.on("logout", () => {
         connectedUsers = connectedUsers.filter(user => user.id !== socket.userId);
         socket.disconnect();
-        console.log("user disconnected")
+        console.log("user logged out")
       });
       socket.on("disconnect", () => {
         console.log("disconnected")

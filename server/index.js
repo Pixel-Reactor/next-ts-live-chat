@@ -36,7 +36,7 @@ export const io = new SocketServer(server, {
         origin: '*',
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true,
-    }
+    } 
 })
 app.use(routes);
 
