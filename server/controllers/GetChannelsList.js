@@ -2,13 +2,13 @@
 import DBconn from "../db.js";
 
 
-export const GetChannelsList = async () => {
+export const GetChannelsList = async (id) => {
     let connection
     try {
         connection = await DBconn();
         
         const [get] = await connection.query(
-            `SELECT * FROM channel;`
+            `SELECT * FROM channel_saved WHERE user_id=?;`,[id]
         );
         if (get.length) {
             let data = get;
@@ -18,7 +18,7 @@ export const GetChannelsList = async () => {
         }
 
     } catch (error) {
-        console.log(error)
+        console.log('channel list error',error)
     } finally {
         connection.release()
     }

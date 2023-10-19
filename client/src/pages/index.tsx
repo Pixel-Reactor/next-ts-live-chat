@@ -6,16 +6,9 @@ import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import {IoMdAlert} from 'react-icons/io'
 
-interface ping {
-  message: string;
-}
-interface Props {
-  ping: ping[];
-}
 
 
-
-export default function Home({ ping }: Props) {
+export default function Home() {
   const JsonInstance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
     headers: {
@@ -42,7 +35,6 @@ export default function Home({ ping }: Props) {
  
     try {
       const res = await JsonInstance.post("/login", form);
-     
       const data = res.data;
       if(data.status === 200 && data.message === 'login'){
         seterrmsg('')
@@ -66,11 +58,11 @@ export default function Home({ ping }: Props) {
     }
   };
   useEffect(() => {
-    setSignedUser({token:'',id:''})
+    setSignedUser(null)
   }, [])
   
   return (
-    <main className="select-none  bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-zinc-900 min-h-screen">
+    <main className="select-none bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-zinc-900 min-h-screen">
      {errmsg &&
      <div 
      onClick={()=>seterrmsg('')}
@@ -84,9 +76,9 @@ export default function Home({ ping }: Props) {
 
       <div className="bg-[url('../svg/blurry.svg')] w-full min-h-screen bg-no-repeat bg-cover bg-center p-10 flex justify-center items-start">
         <div className="max-w-3xl">
-          <h1 className="  w-full text-center  md:flex   m-auto drop-shadow-[0_35px_35px_rgba(255,255,255,0.25)] bg-clip-text text-transparent bg-[conic-gradient(at_top,_var(--tw-gradient-stops))]  from-orange-800 via-amber-100 to-orange-900 text-5xl font-bold  tracking-normal ">
+          <h1 className="  w-full text-center  md:flex md:justify-center  m-auto drop-shadow-[0_35px_35px_rgba(255,255,255,0.25)] bg-clip-text text-transparent bg-[conic-gradient(at_top,_var(--tw-gradient-stops))]  from-orange-800 via-amber-100 to-orange-900 text-5xl font-bold  tracking-normal ">
             Welcome to 
-            <span className="mx-auto text-center flex justify-center">
+            <span className="mx-auto md:mx-2 text-left flex justify-center">
               d
               <Image
                 className="w-auto h-auto"
@@ -212,14 +204,3 @@ export default function Home({ ping }: Props) {
     </main>
   );
 }
-
-
-export const getServerSideProps = async () => {
-  const res = 'hola'
-
-  return {
-    props: {
-      ping: res,
-    },
-  };
-};

@@ -9,8 +9,8 @@ export default async function getUserInfo(token: string, target: string) {
       "Content-Type": "application/json",
       Authorization: token,
     },
-  });
- 
+  }); 
+   console.log(target)
   const res = await instance.post('/userinfo',{target:target});
   console.log(res)
   if(res.data.status === 200){

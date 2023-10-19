@@ -15,11 +15,16 @@ const config: Config = {
       },
       boxShadow: {
         'bottom': '0 1px 20px -10px  rgb(10,100,100)',
+      },
+      animation: {
+        'spin-slow': 'spin 8s linear infinite',
+        'fade-in':' pulse 0.8s linear'
       }
     },
   },
   plugins: [
-    require('tailwind-scrollbar-hide')
+    require('tailwind-scrollbar-hide'),
+    require("tailwindcss-animation-delay"),
     // ...
   ]
 }

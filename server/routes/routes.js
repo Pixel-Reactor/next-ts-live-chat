@@ -14,7 +14,14 @@ import { GetUserInfo } from "../controllers/GetUserInfo.js";
 import { ImgLink } from "../controllers/imgLink.js";
 import { GetMessages } from "../controllers/GetMessages.js";
 import { GetChannelsList } from "../controllers/GetChannelsList.js";
-
+import CreateChannel from "../controllers/CreateChannel.js";
+import { SrcChannel } from "../controllers/SrcChannel.js";
+import { SaveChannel } from "../controllers/SaveChannel.js";
+import { RemoveChannel } from "../controllers/ExitChannel.js";
+import { PrivateMessage } from "../controllers/PrivateMessage.js";
+import { GetConversations } from "../controllers/GetConversations.js";
+import { GetConversation } from "../controllers/GetConversation.js";
+import { GetPrivateMessages } from "../controllers/GetPrivateMessage.js";
 const router = Router()
 
 
@@ -37,9 +44,24 @@ router.post('/userinfo',isUser,GetUserInfo)
 router.post('/getmessages',isUser,GetMessages)
 
 router.post('/channelinfo',isUser,GetMessages)
+ 
+router.post('/createchannel',isUser,CreateChannel)
+
+router.post('/savechannel',isUser,SaveChannel)
+
+router.post('/privatemessage',isUser,PrivateMessage)
+
+router.get('/conversations',isUser,GetConversations)
+
+router.post('/conversation',isUser,GetConversation)
+
+router.post('/getprivatemessages',isUser,GetPrivateMessages)
 
 router.get('/getchannels',isUser,GetChannelsList)
 
+router.post('/channelsrc',isUser,SrcChannel)
+
+router.post('/removechannel',RemoveChannel)
 
 router.get('/avatar/:id', ImgLink);
 

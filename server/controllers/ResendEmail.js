@@ -1,5 +1,4 @@
 import DBconn from "../db.js";
-import { v4 as uuidv4 } from 'uuid';
 
 const ResendEmail = async (req, res, next) => {
     const connection = await DBconn();

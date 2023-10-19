@@ -2,14 +2,14 @@
 import DBconn from "../db.js";
 
 
-export const GetChannelInfo = async (id) => {
+export const userInfo = async (id) => {
     let connection
-    try {
+    try { 
         connection = await DBconn();
-       
+        
         const [get] = await connection.query(
             `
-            SELECT * FROM channel
+            SELECT id,avatar,username,bio,name FROM user
             WHERE id = ? ;
             `,
             [id]
@@ -17,19 +17,14 @@ export const GetChannelInfo = async (id) => {
         if (get.length) {
             let data = get[0]
             
-            return data
+           return data
         } else {
-            return {
-                create_at: "",
-                created_by:"",
-                description:"",
-                id:"default",
-                name:"general",
-                message: 'Cannot get channel info'
-            }  
+            return null
+
         }
+
     } catch (error) {
-        console.log(error)
+       return null
     } finally {
         connection.release()
     }

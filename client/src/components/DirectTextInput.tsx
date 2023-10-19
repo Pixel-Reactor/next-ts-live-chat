@@ -3,30 +3,39 @@ import { message, channelinfo } from "@/utils/chatInterfaces";
 import { useMyContext } from "../context/context";
 import { emojis } from "@/utils/emojis";
 import { BsFillSendFill, BsEmojiLaughingFill } from "react-icons/bs";
+import axios from 'axios'
 
 
-
-const TextInput = ({emojionprop}:any) => {
-    const { signedUser ,socket,channelIn} = useMyContext();
+const DirectTextInput = ({emojionprop}:any) => {
+    const { signedUser ,socket, directMessage} = useMyContext();
     const [emojion, setemojion] = useState(false);
 
     const [message, setmessage] = useState<message>(
       {text: ""});
+
+      const axiosInstance = axios.create({
+        baseURL: process.env.NEXT_PUBLIC_API_URL,
+        headers: {
+          "Content-Type": "application/json",
+          authorization: signedUser?.token || null,
+        },
+      });
+    
     const HandleChange = ({
         target: { value },
       }: ChangeEvent<HTMLInputElement>) => {
         setmessage({...message, text: value });
       };
-      const handleSubmit = (e: React.SyntheticEvent) => {
+      const handleSubmit = async(e: React.SyntheticEvent) => {
         e.preventDefault();
         if(signedUser && socket){ 
-        socket.emit("sendmessage", { from: signedUser.id, message: message,channel:channelIn });
-      
+        // socket.emit("privatemessage", { from: signedUser.id, message: message,to:directMessage.to});
+        const res = await axiosInstance.post('/privatemessage',{message:message,to:directMessage.to});
+        
         setmessage({  text: "" });
         console.log(message)
       
       }
-       
       };
      useEffect(() => {
      setemojion(emojionprop);
@@ -35,7 +44,7 @@ const TextInput = ({emojionprop}:any) => {
      
       
   return (
-    <div className="h-16 px-3  text-white mb-8 ">
+    <div className="h-16 px-3  text-white mb-1 ">
     <form
       onChange={(e) => e.preventDefault()}
       onSubmit={handleSubmit}
@@ -90,4 +99,4 @@ const TextInput = ({emojionprop}:any) => {
   )
 }
 
-export default TextInput
+export default DirectTextInput

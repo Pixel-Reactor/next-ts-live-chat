@@ -47,10 +47,10 @@ export const SendMail = async (req, res) => {
         });
       
         if(info.messageId ){
-            console.log(req.Saved)
+          
             res.status(200).send({status:200,done:true,message:'Mail sent'})
         }else{
-            console.log(req.Saved)
+           
             res.status(201).send({status:403,done:false,message:'mail send failed'})
         }
        

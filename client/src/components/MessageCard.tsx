@@ -5,6 +5,7 @@ import { space } from 'postcss/lib/list';
 interface message{
     text:string,
     date:string,
+    created_at:string,
     sender:{
         avatar:string,
         bio:string|null,
@@ -17,12 +18,13 @@ interface message{
 
 interface MessageCardProps {
     message: message;
+    i:number
   }
   
-  const MessageCard: React.FC<MessageCardProps> = ({ message }) => {
+  const MessageCard: React.FC<MessageCardProps> = ({ message,i }) => {
     const PrintDate = ()=>{
       const now :Date= new Date()
-      const date:Date = new Date(message.date);
+      const date:Date = new Date(message.date|| message.created_at);
       const Diff:number = date.getTime() - now.getTime();
       const daysDiff: number =(Math.round(Diff / (1000 * 60 * 60 * 24))) * -1;
       const hour = date.getHours() < 10 ? '0'+date.getHours() : date.getHours();
@@ -37,7 +39,7 @@ interface MessageCardProps {
     }
 
     return (
-      <div className='max-w-lg  h-full flex text-md  rounded-lg'>
+      <div className={`max-w-lg  h-full flex text-md  rounded-lg animate-fade-in delay-200 animation-delay-[${i*10}ms]`}>
         <div className='flex  w-full items-center h-full  '>
         <div className=''> 
         <img src={message.sender.avatar} 

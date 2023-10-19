@@ -21,15 +21,20 @@ export const socketUser = async (id) => {
         } else {
           return {
             avatar: 'http://192.168.1.143:7000/avatar/user.png',   
-            username: 'ElMatt',
+            username: 'not found',
             bio: null,
-            name: 'Matteo'
+            name: 'none'
           }
 
         }
 
     } catch (error) {
-        console.log(error)
+        return {
+            avatar: 'http://192.168.1.143:7000/avatar/user.png',   
+            username: 'not found',
+            bio: null,
+            name: 'none'
+          }
     } finally {
         connection.release()
     }

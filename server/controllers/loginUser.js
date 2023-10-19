@@ -21,7 +21,7 @@ export const loginUser = async (req, res, next) => {
 
     const [user] = await conexion.query(
       `
-            SELECT id, name, username, email, avatar,active
+            SELECT id, name, username,bio, email, avatar,active
             FROM user
             WHERE email = ? AND pwd = SHA2(?,256)
             `,
@@ -39,8 +39,9 @@ export const loginUser = async (req, res, next) => {
 
     const usuario = {
       id: user[0].id,
-      nombre: user[0].nombre,
+      name: user[0].nombre,
       username: user[0].username,
+      bio:user[0].bio,
       email: user[0].email,
       active: user[0].active,
       avatar: user[0].avatar
@@ -60,6 +61,8 @@ export const loginUser = async (req, res, next) => {
       message: 'login',
       token: token,
       username: usuario.username,
+      name:usuario.name,
+      bio:usuario.bio,
       avatar: usuario.avatar,
       nombre:usuario.nombre,
       id: usuario.id,
