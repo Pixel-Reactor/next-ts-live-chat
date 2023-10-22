@@ -51,6 +51,7 @@ export default function SideBar({}) {
   }, [channelIn,conversations]);
 
   useEffect(() => {
+   
     if (messageScroll.current) {
       const scrollDown = messageScroll.current;
       scrollDown.scrollTop = scrollDown.scrollHeight;
@@ -70,7 +71,7 @@ export default function SideBar({}) {
     } 
     setnotifications(notificationnumber)
    }, [conversations])
-
+ 
   return (
     <section
       onClick={(e) => {

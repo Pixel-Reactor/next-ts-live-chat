@@ -60,7 +60,7 @@ export default function Home() {
   return (
     <main className="border-2 border-zinc-900 h-screen select-none flex-col overflow-hidden text-zinc-300 flex bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-zinc-900 min-h-[700px]">
     
-      <div className={`${errormsg.on? 'flex': 'hidden'}  rounded-lg fixed top-10 z-50 p-3 text-zinc-50/50  justify-between items-center bg-zinc-800  left-0 right-0 w-80  border mx-auto border-zinc-50`}>
+      <div className={`${errormsg.on? 'flex': 'hidden'}  rounded-lg fixed top-10 z-50 p-3 text-zinc-50/90  justify-between items-center bg-zinc-800  left-0 right-0 w-80  border mx-auto border-zinc-50`}>
          <p>{errormsg.msg}</p> 
          <span onClick={(()=>setErrormsg({...errormsg,on:false}))}>
           <AiOutlineClose/>

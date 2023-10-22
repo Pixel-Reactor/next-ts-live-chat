@@ -22,6 +22,10 @@ const CreateChannel = async (req, res, next) => {
     
         const socketId = findSocketIdById(userId);
         const [exist]= await connection.query(`SELECT * FROM channel WHERE name=?`,[name]);
+        const [count]= await connection.query(`SELECT COUNT(id) AS count from channel WHERE created_by = ?`,[userId]);
+        if(count[0].count >=3 ){
+            return res.send({ status: 201, done: false, message: 'Only 3 channel creation per user allowed' });
+        }
         if(exist.length){return res.send({ status: 201, done: false, message: 'Channel name in use, please choose another' }); return}
 
         const [response] = await connection.query(
