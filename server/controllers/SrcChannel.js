@@ -11,7 +11,7 @@ export const SrcChannel = async (req,res) => {
       
         const [get] = await connection.query(
             `
-            SELECT id,name FROM channel
+            SELECT id,name,description FROM channel
             WHERE name LIKE '%${src}%' ;
             `,
            

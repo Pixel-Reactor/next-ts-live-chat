@@ -129,7 +129,7 @@ export const Template = (code)=>{
     <tr>
     <td class="pad" style="padding-bottom:15px;padding-top:10px;">
     <div style="color:#ffffff;font-family:'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Geneva, Verdana, sans-serif;font-size:38px;line-height:120%;text-align:center;mso-line-height-alt:45.6px;">
-    <p style="margin: 0; word-break: break-word;"><span>Gracias por registrarte en DonutChat!</span></p>
+    <p style="margin: 0; word-break: break-word;"><span>Thank you for registering in  DonutChat!</span></p>
     </div>
     </td>
     </tr>
@@ -138,8 +138,8 @@ export const Template = (code)=>{
     <tr>
     <td class="pad">
     <div style="color:#ffffff;font-family:'Varela Round', 'Trebuchet MS', Helvetica, sans-serif;font-size:17px;line-height:150%;text-align:center;mso-line-height-alt:25.5px;">
-    <p style="margin: 0; word-break: break-word;">Estás a un paso para entrar.</p>
-    <p style="margin: 0; word-break: break-word;">Pincha en el botón abajo para activar tu usuario </p>
+    <p style="margin: 0; word-break: break-word;"> One step lft to get in!.</p>
+    <p style="margin: 0; word-break: break-word;">Click in the button below to activate your user </p>
     </div>
     </td>
     </tr>
@@ -147,7 +147,7 @@ export const Template = (code)=>{
     <table border="0" cellpadding="0" cellspacing="0" class="button_block block-5" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;" width="100%">
     <tr>
     <td class="pad" style="padding-bottom:20px;padding-left:15px;padding-right:15px;padding-top:20px;text-align:center;">
-    <div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href=${link} style="height:52px;width:113px;v-text-anchor:middle;" arcsize="12%" strokeweight="0.75pt" strokecolor="#CE2C94" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#091548; font-family:'Trebuchet MS', sans-serif; font-size:15px"><![endif]--><a href=${link} style="text-decoration:none;display:inline-block;color:#091548;background-color:#ffffff;border-radius:6px;width:auto;border-top:1px solid #CE2C94;font-weight:undefined;border-right:1px solid #CE2C94;border-bottom:1px solid #CE2C94;border-left:1px solid #CE2C94;padding-top:10px;padding-bottom:10px;font-family:'Varela Round', 'Trebuchet MS', Helvetica, sans-serif;font-size:15px;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:15px;display:inline-block;letter-spacing:normal;"><span style="word-break:break-word;"><span data-mce-style="" style="line-height: 30px;"><strong>Activar</strong></span></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+    <div align="center" class="alignment"><!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href=${link} style="height:52px;width:113px;v-text-anchor:middle;" arcsize="12%" strokeweight="0.75pt" strokecolor="#CE2C94" fillcolor="#ffffff"><w:anchorlock/><v:textbox inset="0px,0px,0px,0px"><center style="color:#091548; font-family:'Trebuchet MS', sans-serif; font-size:15px"><![endif]--><a href=${link} style="text-decoration:none;display:inline-block;color:#091548;background-color:#ffffff;border-radius:6px;width:auto;border-top:1px solid #CE2C94;font-weight:undefined;border-right:1px solid #CE2C94;border-bottom:1px solid #CE2C94;border-left:1px solid #CE2C94;padding-top:10px;padding-bottom:10px;font-family:'Varela Round', 'Trebuchet MS', Helvetica, sans-serif;font-size:15px;text-align:center;mso-border-alt:none;word-break:keep-all;" target="_blank"><span style="padding-left:30px;padding-right:30px;font-size:15px;display:inline-block;letter-spacing:normal;"><span style="word-break:break-word;"><span data-mce-style="" style="line-height: 30px;"><strong>Active</strong></span></span></span></a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
     </td>
     </tr>
     </table>

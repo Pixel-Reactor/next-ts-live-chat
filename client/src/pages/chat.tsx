@@ -11,7 +11,7 @@ import {AiOutlineClose} from 'react-icons/ai'
 
 export default function Home() {
   const router = useRouter();
-  const { signedUser, socket, setSocket ,setSignedUser,directMessage,errormsg,setErrormsg} = useMyContext();
+  const { signedUser, socket, setSocket ,setSignedUser,directMessage,errormsg,setErrormsg,setNotification} = useMyContext();
 
   useEffect(() => {
     if (!signedUser ){
@@ -39,6 +39,7 @@ export default function Home() {
           socket.on("error", (error: any) => {
           console.error("Socket connection error", error);
           });
+          socket.on("notification",(notification)=>setNotification(notification))
         } catch (error) {
           console.log(error);
         }
@@ -47,30 +48,19 @@ export default function Home() {
     return () => {
       if(socket){
         socket.disconnect();
-        setSignedUser(null)
+        setSignedUser(null);
+        socket.off('notification');
+        socket.off('error')
       }
     };
   }, [socket]);
 
 
-     
 
   return (
-    <main className="border-2 border-zinc-900 select-none flex-col overflow-hidden text-zinc-300 flex bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-zinc-900 min-h-[700px] h-screen ">
-      <h1 className=" px-5 py-2 h-12 flex justify-between w-full text-center  m-auto drop-shadow-[0_35px_35px_rgba(255,255,255,0.25)] bg-clip-text text-transparent bg-[conic-gradient(at_top,_var(--tw-gradient-stops))]  from-orange-800 via-amber-100 to-orange-900 text-md font-bold  tracking-normal ">
-        <span className=" flex gap-1 justify-left items-center w-full">
-          d
-          <Image
-            className="w-auto h-auto animate-spin-slow  "
-            src="/donut.png"
-            width={5}
-            height={0}
-            alt="donut"
-          />
-          nutChat!
-        </span>
-      </h1>
-      <div className={`${errormsg.on? 'flex': 'hidden'} rounded-lg fixed top-10 z-50 p-3 text-zinc-50/50  justify-between items-center bg-zinc-800  left-0 right-0 w-80  border mx-auto border-zinc-50`}>
+    <main className="border-2 border-zinc-900 h-screen select-none flex-col overflow-hidden text-zinc-300 flex bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-zinc-900 min-h-[700px]">
+    
+      <div className={`${errormsg.on? 'flex': 'hidden'}  rounded-lg fixed top-10 z-50 p-3 text-zinc-50/50  justify-between items-center bg-zinc-800  left-0 right-0 w-80  border mx-auto border-zinc-50`}>
          <p>{errormsg.msg}</p> 
          <span onClick={(()=>setErrormsg({...errormsg,on:false}))}>
           <AiOutlineClose/>

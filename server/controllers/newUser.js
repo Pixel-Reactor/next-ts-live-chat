@@ -13,7 +13,7 @@ const newUser = async (req, res, next) => {
     try {
      
         const { username, pwd, bio, name, email, city } = req.body
-        console.log(username, pwd, bio)
+    
        
     
         const avatar = req.file ? `${process.env.BACK_URL}/avatar/${req.file.filename}` : null
@@ -22,8 +22,8 @@ const newUser = async (req, res, next) => {
 
 
         const response = await connection.query(
-            'INSERT INTO user(id,name,username,email,avatar,city,pwd,active,act_code) VALUES(?,?,?,?,?,?,SHA2(?,256),?,?)',
-             [uuidv4(), name, username, email, avatar,city, pwd, 0, code])
+            'INSERT INTO user(id,name,username,email,bio,avatar,city,pwd,active,act_code) VALUES(?,?,?,?,?,?,?,SHA2(?,256),?,?)',
+             [uuidv4(), name, username, email, bio,avatar,city, pwd, 0, code])
 
         if (response[0].affectedRows > 0) {
             req.Saved = true;

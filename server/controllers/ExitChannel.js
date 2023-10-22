@@ -14,7 +14,7 @@ export const RemoveChannel = async (req, res) => {
     }
 
     const socketId = findSocketIdById(user);
-    console.log('connected', getConnectedUsers())
+   
     try {
         connection = await DBconn();
         const [del] = await connection.query(

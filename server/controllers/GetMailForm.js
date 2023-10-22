@@ -7,7 +7,7 @@ export const GetMailForm = async (req, res, next) => {
   try {
     conexion = await DBconn();
     const { id } = req.params;
-    console.log('id',id)
+   
     
     if (!id) {
       res.send({status:201,done:false});

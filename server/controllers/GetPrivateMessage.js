@@ -7,8 +7,7 @@ export const GetPrivateMessages = async (req, res) => {
     try { 
         connection = await DBconn();
         const conversationId = req.body.conversation
-        console.log(conversationId)
-
+        
         const [get] = await connection.query(
             `
             SELECT dm.id,dm.created_at,conversation_id,dm.text, 

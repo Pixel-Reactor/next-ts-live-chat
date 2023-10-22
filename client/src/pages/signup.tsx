@@ -4,8 +4,7 @@ import { MdInsertPhoto } from "react-icons/md";
 import { AiOutlineCheck, AiOutlineClose } from "react-icons/ai";
 import { GoAlert } from "react-icons/go";
 import axios from 'axios'
-
-
+import { useRouter } from "next/router";
 import Image from "next/image";
 
 interface Form {
@@ -41,7 +40,7 @@ export default function Home() {
   const [file, setfile] = useState<File | null>();
   const [fileErr, setfileErr] = useState<string>("");
   const [errormessage, setErrormessage] = useState<string>("")
-  
+  const router = useRouter();
   const [form, setform] = useState<Form>({
     username: "",
     bio: "",
@@ -119,7 +118,7 @@ export default function Home() {
       const data =response.data;
       setloading(false);
       if (data.status === 200) {
-        console.log("todo bien!");
+       router.push('/success')
 
       } else if(data.field === 'avatar'){
         setfileErr(data.message)
@@ -473,6 +472,7 @@ export default function Home() {
           <div className="mt-6 flex items-center justify-end gap-x-6">
             <button
               type="button"
+              onClick={()=>router.push('/')}
               className="text-sm font-semibold leading-6 text-zinc-50"
             >
               Cancel

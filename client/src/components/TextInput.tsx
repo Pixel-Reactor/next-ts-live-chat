@@ -6,7 +6,7 @@ import { BsFillSendFill, BsEmojiLaughingFill } from "react-icons/bs";
 
 
 
-const TextInput = ({emojionprop}:any) => {
+const TextInput = () => {
     const { signedUser ,socket,channelIn} = useMyContext();
     const [emojion, setemojion] = useState(false);
 
@@ -23,16 +23,11 @@ const TextInput = ({emojionprop}:any) => {
         socket.emit("sendmessage", { from: signedUser.id, message: message,channel:channelIn });
       
         setmessage({  text: "" });
-        console.log(message)
       
       }
        
       };
-     useEffect(() => {
-     setemojion(emojionprop);
-     console.log(emojionprop)
-     }, [emojionprop])
-     
+    
       
   return (
     <div className="h-16 px-3  text-white mb-8 ">

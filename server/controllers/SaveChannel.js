@@ -8,6 +8,7 @@ import { GetPopular } from "./GetPopulars.js";
 export const SaveChannel = async (req, res) => {
     let connection
     const { user, channel } = req.body;
+    console.log('savechnnel',channel)
   
     const connected = getConnectedUsers()
     function findSocketIdById(user) {
@@ -23,8 +24,8 @@ export const SaveChannel = async (req, res) => {
 
         const [save] = await connection.query(
             `
-            INSERT INTO channel_saved (save_id, user_id, channel_id, channel_name)
-            SELECT ?, ?, ?, ?
+            INSERT INTO channel_saved (save_id, user_id, channel_id, channel_name,channel_description)
+            SELECT ?, ?, ?, ? ,?
             FROM dual
             WHERE NOT EXISTS (
                 SELECT 1
@@ -32,11 +33,10 @@ export const SaveChannel = async (req, res) => {
                 WHERE user_id = ? AND channel_name = ?
                 LIMIT 1
             ); ;
-            `, [uuidv4(), user, channel.id, channel.name, user, channel.name]
+            `, [uuidv4(), user, channel.id, channel.name, channel.description||null,user,channel.name]
 
         );
      
-
         if (save.affectedRows > 0) {
             const list = await GetChannelsList(user);
             io.to(socketId).emit("savedchannels", list)

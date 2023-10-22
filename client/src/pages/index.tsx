@@ -92,8 +92,19 @@ export default function Home() {
           </h1>
           <div className="flex flex-col md:flex-row mt-10 ">
             <p className="text-slate-200 sm:mb-10 text-justify font-semibold  leading-7 max-w-2xl m-auto h-30 mx-6 mt-10 drop-shadow-[0_35px_35px_rgba(255,255,255,0.25)] ">
-             DonutChat is a casual live chat, to spend time chatting with everyone or with your friends.
-             Get donuts when people like what you write or upload and be the donut king or queen!
+             DonutChat is a casual live chat, to spend time chatting with everyone online.
+             <br />
+
+             The rules : 
+             <br />
+             - You can't add friends, to get in touch with someone, you have to be online!
+             <br />
+             - As soon as you start a conversation with someone, it will be saved.
+             <br />
+             - You can create a channel, and all of them are public.
+             <br />
+             - Every 2 weeks of inactivity of a channel will remove it 
+             
             </p>
             <div className="mt-20 mx-auto sm:mt-0 min-w-[400px] w-[400px] relative ">
               <div className="absolute  w-full h-full bg-gradient-to-r from-transparent via-gray-700-500 to-zinc-950/70 rounded-md"></div>

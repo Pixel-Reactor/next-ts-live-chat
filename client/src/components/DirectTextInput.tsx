@@ -33,13 +33,11 @@ const DirectTextInput = ({emojionprop}:any) => {
         const res = await axiosInstance.post('/privatemessage',{message:message,to:directMessage.to});
         
         setmessage({  text: "" });
-        console.log(message)
       
       }
       };
      useEffect(() => {
      setemojion(emojionprop);
-     console.log(emojionprop)
      }, [emojionprop])
      
       

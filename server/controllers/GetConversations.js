@@ -20,10 +20,10 @@ export const GetConversations = async (req, res) => {
                 get.map(async item => {
                 const other = item.sender === user ? item.recipient : item.sender;
                 const getUser = await userInfo(other)
-                return { conversationId: item.id, with: getUser }
+                return { conversationId: item.id, with: getUser ,new:1}
             })
             );
-            console.log('allist', filterList)
+  
            return res.send({ status: 200, list: filterList })
         }
 

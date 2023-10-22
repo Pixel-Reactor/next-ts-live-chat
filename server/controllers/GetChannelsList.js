@@ -14,7 +14,7 @@ export const GetChannelsList = async (id) => {
             let data = get;
             return { status: 200, ok: true, list: data }
         } else {
-            return { status: 203, ok: false, message: 'Cannot get messages' }
+            return { status: 203, ok: false, message: 'Cannot get channel list' }
         }
 
     } catch (error) {

@@ -8,7 +8,7 @@ export const SendMail = async (req, res) => {
 
     try {
        
-        console.log('mail sender',process.env.MAIL_USER)
+     
         
         const { email } = req.body;
         const code = req.Code;

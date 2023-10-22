@@ -5,7 +5,7 @@ import DBconn from "../db.js";
 export const ConfirmUser = async (req, res) => {
  let conexion
   try {
-    console.log(req.params.code);
+
     const code = req.params.code || 'no-code'
     conexion = await DBconn();
     
@@ -18,7 +18,7 @@ export const ConfirmUser = async (req, res) => {
             `,
       [code]
     ); 
-   console.log(check)
+
     if(check[0].act_code && check[0].act_code === code ){
       const [activation] = await conexion.query(
           `UPDATE user
@@ -26,8 +26,7 @@ export const ConfirmUser = async (req, res) => {
            WHERE id =?`,
           [check[0].id]
         );
-        console.log(activation)
-        console.log(`${process.env.FRONT_URL}/register/activate`)
+    
       res.redirect(`${process.env.FRONT_URL}/register/activate`)
 
     }else{

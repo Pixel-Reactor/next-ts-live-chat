@@ -15,13 +15,16 @@ export default function SideBar({}) {
     setSidebarOn,
     friendsOn,
     setFriendsOn,
+    conversations,
+    
   } = useMyContext();
   const [messages, setmessages] = useState<any[]>([]);
-  const [emojion, setemojion] = useState(false);
+  
   const messageScroll = useRef<null | HTMLDivElement>(null);
+  const [notifications, setnotifications] = useState(0)
 
+ 
   useEffect(() => {
-    console.log(channelIn)
     if (channelIn && signedUser) {
       const HandleMessage = (message: any) => {
      
@@ -30,12 +33,8 @@ export default function SideBar({}) {
         }
       };
       if (socket) {
-        socket.off("newmessage");
         socket.on("newmessage", HandleMessage);
-      
-       
       }
-
       const Get = async () => {
         const res = await getMessages(signedUser?.token, channelIn.channel_id);
         if (res && res.status === 200) {
@@ -45,17 +44,32 @@ export default function SideBar({}) {
       Get();
     }
     return () => {
-      console.log("dismounted");
+      if(socket){
+        socket.off("newmessage");
+      }
     };
-  }, [channelIn]);
+  }, [channelIn,conversations]);
 
   useEffect(() => {
     if (messageScroll.current) {
       const scrollDown = messageScroll.current;
       scrollDown.scrollTop = scrollDown.scrollHeight;
     }
-    console.log(channelIn);
+   
   }, [channelIn, messages]);
+
+
+  useEffect(() => {
+  
+    let notificationnumber = 0 
+    if(conversations?.length){
+      conversations.map((item:any)=>{
+        notificationnumber= notificationnumber+ item.new
+       
+      })
+    } 
+    setnotifications(notificationnumber)
+   }, [conversations])
 
   return (
     <section
@@ -63,25 +77,26 @@ export default function SideBar({}) {
         e.stopPropagation();
         setSidebarOn(false);
         setFriendsOn(false);
-        setemojion(false);
+       
       }}
       className="w-full relative min-w-[400px]  bg-zinc-800 flex flex-col "
     >
-      <header className="flex relative items-center justify-between  py-3  text-left shadow-[0px_7px_20px_0px_rgba(0,_0,_0,_1)]">
+      <header className="flex relative items-center justify-between  py-3 text-left shadow-[0px_7px_10px_0px_rgba(0,_0,_0,_1)]">
         <span
           onClick={(e) => {
             e.stopPropagation();
-            setSidebarOn(!sidebarOn);
+            setSidebarOn(true);
+            setFriendsOn(false)
           }}
           className={` transition-all ${
             sidebarOn ? "opacity-0" : "opacity-100"
           }  rounded-tr-xl rounded-br-xl   w-10 h-10 flex flex-col items-center justify-center  `}
         >
-          <AiOutlineMenu size={18} className="text-zinc-50" />
+          <AiOutlineMenu size={22} className="text-zinc-50" />
         </span>
         <div className="flex flex-col w-full px-3">
-          <h1 className="bg-gradient-to-b flex items-center from-neutral-100 via-gray-200 to-neutral-900 bg-clip-text text-transparent font-medium text-xl ">
-            <PiPlugsConnectedFill className=" text-zinc-50 m-2" size={25} />
+          <h1 className="flex items-center font-medium text-md">
+            <PiPlugsConnectedFill className=" text-zinc-50 m-2" size={20} />
             {channelIn ? `${channelIn.channel_name}` : "No channel selected"}
           </h1>
         </div>
@@ -89,13 +104,19 @@ export default function SideBar({}) {
         <span
           onClick={(e) => {
             e.stopPropagation();
-            setFriendsOn(!sidebarOn);
+            setSidebarOn(false)
+            setFriendsOn(true);
           }}
           className={` transition-all ${
             friendsOn ? "opacity-0" : "opacity-100"
-          }  rounded-tl-xl rounded-bl-xl   w-10 h-10 flex flex-col items-center justify-center  `}
+          }   rounded-tl-xl rounded-bl-xl  flex   items-center justify-center  `}
         >
-          <PiUsersThreeFill size={18} className="text-zinc-50" />
+          <PiUsersThreeFill size={22} className="text-zinc-50" />
+         <span 
+         className="p-1 px-2  h-6 flex text- items-center justify-center rounded-md font-medium bg-sky-700"> 
+         {notifications}
+         </span>
+        
         </span>
       </header>
 
@@ -103,20 +124,20 @@ export default function SideBar({}) {
         ref={messageScroll}
         className=" overflow-y-scroll  bg-zinc-800 p-6 pb-32 flex flex-col justify-between custom-scrollbar"
       >
-        {channelIn && (
-          <div>
-            <p>{channelIn.channel_name}</p>
-            <p>{channelIn.channel_description}</p>
-          </div>
-        )}
-        {messages &&
+        {channelIn && <><h1 className="text-3xl p-2 font-medium w-full  text-center">Welcome to <br />{channelIn?.channel_name} channel!</h1>
+        <h2 className="text-lg p-4 font-normal w-full border-b border-zinc-50/20 text-center">{channelIn?.channel_description}</h2></>}
+        
+        {messages.length ?
           messages.map((item: any, i: any) => (
             <MessageCard i={i} key={item.id} message={item} />
-          ))}
+          )) : <div className="flex flex-col font-medium items-center text-center mx-auto justify-center w-full h-full max-w-lg ">
+            <img src="/wdonut.png" alt="donut" />
+            <p>Oops! Looks like there are no messages in here... <br /> select a channel and be the first one!</p></div>} 
       </article>
-      <div className="absolute bottom-8  bg-zinc-800 left-0 w-full mx-auto h-26  ">
-        <TextInput emojionprop={emojion} mymessage={setmessages} />
-      </div>
+      {channelIn &&  <div className="absolute bottom-8  bg-zinc-800 left-0 w-full mx-auto h-26  ">
+        <TextInput  />
+      </div>}
+     
     </section>
   );
 }
