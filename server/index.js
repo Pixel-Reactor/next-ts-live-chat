@@ -15,8 +15,8 @@ const app = express();
 
 
 const httpsOptions = {
-  key: fs.readFileSync('/etc/letsencrypt/live/chat-api.pixel-reactor.com/privkey.pem'), // Ruta a tu clave privada
-  cert: fs.readFileSync('/etc/letsencrypt/live/chat-api.pixel-reactor.com/fullchain.pem'),
+  key: fs.readFileSync('...privkey.pem'), // Ruta a tu clave privada
+  cert: fs.readFileSync('...fullchain.pem'),
 };
 
 
