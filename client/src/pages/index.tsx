@@ -10,11 +10,12 @@ import {IoMdAlert} from 'react-icons/io'
 
 export default function Home() {
   const JsonInstance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_URL,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+  withCredentials: true, // Colócala aquí, dentro del objeto de configuración
+});
   const { signedUser, setSignedUser } = useMyContext();
   const [errmsg, seterrmsg] = useState<string>('')
   const router = useRouter();
@@ -109,7 +110,7 @@ export default function Home() {
             <div className="mt-20 mx-auto sm:mt-0 min-w-[400px] w-[400px] relative ">
               <div className="absolute  w-full h-full bg-gradient-to-r from-transparent via-gray-700-500 to-zinc-950/70 rounded-md"></div>
              
-              <img src="./chatapp.png"  alt="chatpreview" className="w-full h-full rounded-md"/>
+              <img src="/Chatapp.png"  alt="chatpreview" className="w-full h-full rounded-md"/>
               </div>
           
           </div>

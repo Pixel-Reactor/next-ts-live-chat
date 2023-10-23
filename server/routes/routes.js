@@ -11,7 +11,7 @@ import { CheckEmail } from "../controllers/CheckEmail.js";
 import ResendEmail from "../controllers/ResendEmail.js";
 import { isUser } from "../middlewares/isUser.js";
 import { GetUserInfo } from "../controllers/GetUserInfo.js";
-import { ImgLink } from "../controllers/imgLink.js";
+import { ImgLink } from "../controllers/ImgLink.js";
 import { GetMessages } from "../controllers/GetMessages.js";
 import { GetChannelsList } from "../controllers/GetChannelsList.js";
 import CreateChannel from "../controllers/CreateChannel.js";
