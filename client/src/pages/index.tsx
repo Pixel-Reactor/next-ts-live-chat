@@ -14,7 +14,7 @@ export default function Home() {
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true, // Colócala aquí, dentro del objeto de configuración
+  withCredentials: true, 
 });
   const { signedUser, setSignedUser } = useMyContext();
   const [errmsg, seterrmsg] = useState<string>('')
